@@ -1,25 +1,8 @@
 <script setup>
-
-import {computed, ref} from "vue";
-
-const props = defineProps({
-  items: {
-    type: Array,
-    required: true,
-  },
-  index: {
-    type: Number,
-    default: 0,
-  }
-})
-
-const emit = defineEmits(['change-index']);
-
-const sliderItems = ref(null);
+import {computed} from "vue";
 
 const sliderItemsStyle = computed(() => {
-  const containerWidth = sliderItems.value?.clientWidth || 0;
-  return `transform: translateX(-${props.index * containerWidth}px);`//
+  return `transform: translateX(-px);`//
 })
 
 </script>
@@ -28,30 +11,21 @@ const sliderItemsStyle = computed(() => {
   <div class="slider">
     <div class="slider__container">
       <ul
-          ref="sliderItems"
           class="slider-items"
           :style="sliderItemsStyle"
       >
-        <li v-for="item in props.items">
-          <slot :item="item"></slot>
-        </li>
+        <!-- слайды сюды -->
       </ul>
 
-      <div
-          class="slider-control slider-control_left"
-          @click="emit('change-index', props.index - 1)"
-      >
+      <div class="slider-control slider-control_left">
         <img src="../../public/arrow-left.png" alt="arrow" />
       </div>
-      <div
-          class="slider-control slider-control_right"
-          @click="emit('change-index', props.index + 1)"
-      >
+      <div class="slider-control slider-control_right">
         <img src="../../public/arrow-left.png" alt="arrow" />
       </div>
 
       <div class="slider-count">
-        {{props.index + 1}}/{{props.items.length}}
+        {{}}/{{}}
       </div>
     </div>
   </div>
